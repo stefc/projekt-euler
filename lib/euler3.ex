@@ -19,11 +19,15 @@ defmodule Euler3 do
     get_largest_prime_factor(n, 2, trunc(:math.sqrt(n)))
   end
 
-  defp get_largest_prime_factor(x, acc, max) when acc > max or x == acc,
+  defp get_largest_prime_factor(x, acc, max)
+    when acc > max or x == acc,
     do: x
 
-  defp get_largest_prime_factor(x, acc, max) when rem(x, acc) == 0,
+  defp get_largest_prime_factor(x, acc, max)
+    when rem(x, acc) == 0,
     do: get_largest_prime_factor(div(x, acc), acc, max)
 
-  defp get_largest_prime_factor(x, acc, max), do: get_largest_prime_factor(x, acc + 1, max)
+  defp get_largest_prime_factor(x, acc, max),
+    do: get_largest_prime_factor(x, acc + 1, max)
+
 end

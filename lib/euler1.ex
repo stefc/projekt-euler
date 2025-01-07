@@ -19,7 +19,6 @@ defmodule Euler1 do
     sum_divisible_by(x, 3) + sum_divisible_by(x, 5) - sum_divisible_by(x, 3 * 5)
   end
 
-  defp sum_divisible_by(n, by) do
-    ((n - mod(n, by)) * (div(n, by) + 1)) >>> 1
-  end
+  defp sum_divisible_by(n, by),
+    do: ((n - mod(n, by)) * (div(n, by) + 1)) >>> 1
 end
