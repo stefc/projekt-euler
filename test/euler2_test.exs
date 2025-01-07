@@ -2,7 +2,7 @@ defmodule Euler2Test do
   use ExUnit.Case
 
   test "sample" do
-    assert Euler2.calc(100) == 2+8+34
+    assert Euler2.calc(100) == 2 + 8 + 34
   end
 
   test "problem" do
