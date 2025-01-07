@@ -5,8 +5,6 @@ A palindromic number reads the same both ways. The largest palindrome made from 
 Find the largest palindrome made from the product of two 3-digit numbers.
 """
 
-  import Integer
-
   def calc(n) do
      start = if n > 99, do: 100, else: 10
      range_1 = start..n
@@ -23,6 +21,6 @@ Find the largest palindrome made from the product of two 3-digit numbers.
   defp reverse(reversed, n),
     do:
       if( n > 0,
-        do: reverse((10 * reversed) + mod(n,10), div(n,10)),
+        do: reverse((10 * reversed) + rem(n,10), div(n,10)),
         else: reversed)
 end
