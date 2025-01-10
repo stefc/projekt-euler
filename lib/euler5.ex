@@ -30,7 +30,22 @@ defmodule Euler5 do
     defp product(a, b),
       do: a * b
 
-    defp power(b,e),
+    defp power(b,a),
       do: trunc(a ** b)
 
+
+      #------------------------------------ Heiko ---------------
+
+      def solve() do
+        Stream.iterate(2 * 3 * 5 * 7 * 9 * 11 * 13 * 17 * 19, fn n -> n + 1 end)
+        |> Stream.filter(&dividable?/1)
+        |> Enum.take(1)
+        |> hd()
+      end
+
+      defp dividable?(n) do
+        Enum.all?(2..21, fn x ->
+          rem(n, x) == 0
+        end)
+      end
 end
