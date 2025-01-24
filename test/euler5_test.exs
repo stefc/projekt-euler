@@ -1,11 +1,10 @@
 defmodule Euler5Test do
   use ExUnit.Case
 
-  test "stefan" do
+  test "sample",
+    do: assert Euler5.calc(10) == 2520
 
-  end
+  test "problem",
+    do: assert Euler5.calc(20) == 1111
 
-  test "heiko" do
-    assert Euler5.solve() == 232_792_560
-  end
 end

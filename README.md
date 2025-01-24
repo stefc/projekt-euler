@@ -1,5 +1,19 @@
 # Euler1
 
+## Prerequisites 
+
+`brew install elixir` 
+
+
+## Learning Elixir 
+
+\\  parameter defaulting   z.B.  accu \\ 0 
+
+pattern matching mit when condition vor dem do 
+
+, do:  ist kurzform von statement  
+
+
 **TODO: Add description**
 
 ## Installation

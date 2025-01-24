@@ -5,47 +5,35 @@ defmodule Euler5 do
     What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20 ?
   """
 
+  def  max_aggregate(a,b),
+    do: Enum.zip(a,b)
+    |> Enum.map(fn {x,y} -> max(x,y) end)
+
+  def count_div(n, factor, accu \\ 0)
+
+  def count_div(n, factor, accu) when rem(n, factor) == 0,
+    do: count_div(div(n, factor), factor, accu + 1)
+
+  def count_div(_, _, accu), do: accu
+
   def calc(n) do
-    start = if n > 99, do: 100, else: 10
-    range_1 = start..n
-    range_2 = start..n
-    Enum.max(for n <- range_1, m <- range_2, is_palindrome(n * m), do: n * m)
+    range = 2..n-1
+    primes = [2,3,5,7,11,13,17,19]
+    prime_factors = Enum.reduce(primes, [], fn (accu, current) -> if(rem(n,current) == 0, count_div(n, current), 0)
   end
-
-  def is_palindrome(n),
-    do: n == reverse(n)
-
-  defp reverse(n),
-    do: reverse(0, n)
-
-  defp reverse(reversed, n),
-    do:
-      if(n > 0,
-        do: reverse(10 * reversed + rem(n, 10), div(n, 10)),
-        else: reversed
-      )
-
-  defp ist_teilbar(a, b),
-    do: rem(a, b) == 0
-
-  defp product(a, b),
-    do: a * b
-
-  defp power(b, a),
-    do: trunc(a ** b)
 
   # ------------------------------------ Heiko ---------------
 
-  def solve() do
-    Stream.iterate(2 * 3 * 5 * 7 * 9 * 11 * 13 * 17 * 19, fn n -> n + 1 end)
-    |> Stream.filter(&dividable?/1)
-    |> Enum.take(1)
-    |> hd()
-  end
+  # def solve() do
+  #   Stream.iterate(2 * 3 * 5 * 7 * 9 * 11 * 13 * 17 * 19, fn n -> n + 1 end)
+  #   |> Stream.filter(&dividable?/1)
+  #   |> Enum.take(1)
+  #   |> hd()
+  # end
 
-  defp dividable?(n) do
-    Enum.all?(2..21, fn x ->
-      rem(n, x) == 0
-    end)
-  end
+  # defp dividable?(n) do
+  #   Enum.all?(2..21, fn x ->
+  #     rem(n, x) == 0
+  #   end)
+  # end
 end
