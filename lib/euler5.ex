@@ -6,35 +6,31 @@ defmodule Euler5 do
   """
   defp primes, do: [2,3,5,7,11,13,17,19]
 
-  def  max_aggregate(a,b),
+  defp  max_aggregate(a,b),
     do: Enum.zip(a,b)
-    |> Enum.map(fn {x,y} -> max(x,y) end)
+    |> Enum.map(fn {x, y} -> max(x, y) end)
 
-  def count_div(n, factor, accu \\ 0)
+  defp count_div(n, factor, accu \\ 0)
 
-  def count_div(n, factor, accu) when rem(n, factor) == 0,
+  defp count_div(n, factor, accu) when rem(n, factor) == 0,
     do: count_div(div(n, factor), factor, accu + 1)
 
-  def count_div(_, _, accu), do: accu
+  defp count_div(_, _, accu), do: accu
 
   defp prime_factors(n) do
     Enum.reduce(primes(), [],
       fn current, accu ->
-        if rem(n,current) == 0 do
-          accu ++ [count_div(n, current)]
-        else
-          accu ++ [0]
-        end
+        accu ++ if(rem(n,current) == 0, do: [count_div(n, current)], else: [0])
       end)
   end
 
   def calc(n) do
     2..n-1
     |> Enum.map(&prime_factors/1)
-    |> Enum.reduce(fn cur, acc -> max_aggregate(cur, acc) end)
+    |> Enum.reduce(&max_aggregate/2)
     |> Enum.zip(primes())
-    |> Enum.map(fn {e,p} -> trunc(:math.pow(p,e)) end)
-    |> Enum.reduce(1, fn a,b -> a * b end)
+    |> Enum.map(fn {n,x} -> :math.pow(x,n) |> trunc() end)
+    |> Enum.reduce(1, &*/2)
   end
 
   # ------------------------------------ Heiko ---------------
