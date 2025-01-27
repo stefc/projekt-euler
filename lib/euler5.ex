@@ -20,7 +20,7 @@ defmodule Euler5 do
   defp prime_factors(n) do
     Enum.reduce(primes(), [],
       fn current, accu ->
-        accu ++ if(rem(n,current) == 0, do: [count_div(n, current)], else: [0])
+        accu ++ if(rem(n,current) == 0, do: [count_div(n, current)], else: [0])›
       end)
   end
 
@@ -36,15 +36,11 @@ defmodule Euler5 do
   # ------------------------------------ Heiko ---------------
 
   def solve() do
-    Stream.iterate(2 * 3 * 5 * 7 * 9 * 11 * 13 * 17 * 19, fn n -> n + 1 end)
+    Stream.iterate(2 * 3 * 5 * 7 * 9 * 11 * 13 * 17 * 19, &+/1)
     |> Stream.filter(&dividable?/1)
     |> Enum.take(1)
     |> hd()
   end
 
-  defp dividable?(n) do
-    Enum.all?(2..21, fn x ->
-      rem(n, x) == 0
-    end)
-  end
+  defp dividable?(n), do: Enum.all?(2..21, &rem(n, &1) == 0)
 end
