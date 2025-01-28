@@ -4,11 +4,12 @@ defmodule Euler5 do
 
     What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20 ?
   """
-  defp primes, do: [2,3,5,7,11,13,17,19]
+  @primes [2, 3, 5, 7, 11, 13, 17, 19]
 
-  defp  max_aggregate(a,b),
-    do: Enum.zip(a,b)
-    |> Enum.map(fn {x, y} -> max(x, y) end)
+  defp max_aggregate(a, b),
+    do:
+      Enum.zip(a, b)
+      |> Enum.map(fn {x, y} -> max(x, y) end)
 
   defp count_div(n, factor, accu \\ 0)
 
@@ -18,18 +19,17 @@ defmodule Euler5 do
   defp count_div(_, _, accu), do: accu
 
   defp prime_factors(n) do
-    Enum.reduce(primes(), [],
-      fn current, accu ->
-        accu ++ if(rem(n,current) == 0, do: [count_div(n, current)], else: [0])
-      end)
+    Enum.reduce(@primes, [], fn current, accu ->
+      accu ++ if(rem(n, current) == 0, do: [count_div(n, current)], else: [0])
+    end)
   end
 
   def calc(n) do
-    2..n-1
+    2..(n - 1)
     |> Enum.map(&prime_factors/1)
     |> Enum.reduce(&max_aggregate/2)
-    |> Enum.zip(primes())
-    |> Enum.map(fn {n,x} -> :math.pow(x,n) |> trunc() end)
+    |> Enum.zip(@primes)
+    |> Enum.map(fn {n, x} -> :math.pow(x, n) |> trunc() end)
     |> Enum.reduce(1, &*/2)
   end
 
@@ -42,5 +42,5 @@ defmodule Euler5 do
     |> hd()
   end
 
-  defp dividable?(n), do: Enum.all?(2..21, &rem(n, &1) == 0)
+  defp dividable?(n), do: Enum.all?(2..21, &(rem(n, &1) == 0))
 end
