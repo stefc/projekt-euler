@@ -8,7 +8,6 @@ defmodule Euler2 do
   def calc(n) do
     root5 = :math.sqrt(5)
     phi = (1 + root5) / 2
-
     1..33
     |> Enum.map(fn x -> trunc((phi ** (x * 3) + phi ** (-x * 3)) / (2 * phi - 1)) end)
     |> Enum.take_while(fn x -> x < n end)

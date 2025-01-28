@@ -20,7 +20,7 @@ defmodule Euler5 do
   defp prime_factors(n) do
     Enum.reduce(primes(), [],
       fn current, accu ->
-        accu ++ if(rem(n,current) == 0, do: [count_div(n, current)], else: [0])›
+        accu ++ if(rem(n,current) == 0, do: [count_div(n, current)], else: [0])
       end)
   end
 
