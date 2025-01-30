@@ -35,12 +35,13 @@ defmodule Euler5 do
 
   # ------------------------------------ Heiko ---------------
 
-  def solve() do
-    Stream.iterate(2 * 3 * 5 * 7 * 9 * 11 * 13 * 17 * 19, &+/1)
-    |> Stream.filter(&dividable?/1)
-    |> Enum.take(1)
-    |> hd()
-  end
+  def solve(),
+    do:
+      Stream.iterate(2 * 3 * 5 * 7 * 9 * 11 * 13 * 17 * 19, &(&1 + 1))
+      |> Stream.filter(&dividable?/1)
+      |> Enum.take(1)
+      |> hd()
 
-  defp dividable?(n), do: Enum.all?(2..21, &(rem(n, &1) == 0))
+  defp dividable?(n),
+    do: Enum.all?(2..21, &(rem(n, &1) == 0))
 end
